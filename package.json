@@ -1,22 +1,42 @@
 {
   "name": "periwinkle-ui",
-  "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pasteltones/periwinkle-ui"
+  },
+  "author": "Pasteltones <ehrbs2018@gmail.com>",
+  "license": "MIT",
+  "description": "A blue-purple simple UI component for a React application.",
   "type": "module",
+  "main": "dist/index.umd.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
+    }
+  },
+  "files": [
+    "/dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "prepare": "pnpm run build",
+    "preview": "vite preview"
   },
   "dependencies": {
+    "@commitlint/cli": "14.1.0",
+    "@commitlint/config-conventional": "14.1.0",
     "@emotion/react": "^11.10.6",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
-  "devDependencies": {
-    "@emotion/babel-plugin": "^11.10.6",
     "@storybook/addon-essentials": "^7.0.4",
     "@storybook/addon-interactions": "^7.0.4",
     "@storybook/addon-links": "^7.0.4",
@@ -24,13 +44,51 @@
     "@storybook/react": "^7.0.4",
     "@storybook/react-vite": "^7.0.4",
     "@storybook/testing-library": "^0.0.14-next.2",
+    "@swc/plugin-emotion": "^2.5.59",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@types/jest": "^28.1.1",
+    "@types/node": "^18.0.0",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
-    "@vitejs/plugin-react": "^3.1.0",
+    "@types/testing-library__jest-dom": "5.14.5",
+    "@typescript-eslint/eslint-plugin": "5.30.3",
+    "@typescript-eslint/parser": "5.30.3",
+    "@vitejs/plugin-react-swc": "^3.3.0",
+    "dotenv": "16.0.3",
+    "eslint": "8.19.0",
+    "eslint-config-airbnb-typescript": "17.0.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-config-react": "1.1.7",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-jsx-a11y": "6.6.0",
+    "eslint-plugin-prettier": "4.2.1",
+    "eslint-plugin-react": "7.30.1",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "eslint-plugin-testing-library": "5.5.1",
+    "husky": "^7.0.4",
+    "jest": "^28.1.1",
+    "jest-environment-jsdom": "^28.1.1",
+    "jest-watch-typeahead": "1.1.0",
+    "lint-staged": "11.2.6",
+    "prettier": "^2.7.1",
     "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rimraf": "3.0.2",
     "storybook": "^7.0.4",
-    "typescript": "^4.9.3",
-    "vite": "^4.2.0",
-    "vite-tsconfig-paths": "^4.2.0"
+    "typescript": "^5.0.2",
+    "vite": "^4.2.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0"
+    }
+  },
+  "engines": {
+    "node": ">=18.x"
+  },
+  "devDependencies": {
+    "vite-plugin-dts": "^2.2.0"
   }
 }
