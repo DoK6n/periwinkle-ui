@@ -1,29 +1,29 @@
-import { css } from '@emotion/react';
-import colors from '~/lib/colors';
+import { css } from '@emotion/react'
+import colors from '../../lib/colors'
 
-type ButtonColorType = keyof typeof colors.periwinkle;
+type ButtonColorType = keyof typeof colors.periwinkle
 
 interface ButtonProps {
   /**
    * button text
    */
-  label?: string;
+  label?: string
   /**
    * background color
    */
-  bg?: ButtonColorType;
+  bg?: ButtonColorType
   /**
    * click event handler
    */
-  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
-function Button({ label = 'Primary', bg = '500', onClick }: ButtonProps) {
+export function Button({ label = 'Primary', bg = '500', onClick }: ButtonProps) {
   return (
     <button css={buttonStyle(bg)} onClick={onClick}>
       {label}
     </button>
-  );
+  )
 }
 
 const buttonStyle = (bg: ButtonColorType) => css`
@@ -56,6 +56,4 @@ const buttonStyle = (bg: ButtonColorType) => css`
   &:active {
     background: ${colors.active[bg]};
   }
-`;
-
-export default Button;
+`
