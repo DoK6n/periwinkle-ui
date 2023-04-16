@@ -2,17 +2,26 @@
 
 ## Installation
 
-To use Periwinkle UI components, all you need to do is install the
-`@periwinkle-ui/react` package and its peer dependencies:
+To use Periwinkle UI components, all you need to do is install the `periwinkle-ui` package
 
 ```sh
-$ yarn add @periwinkle-ui/react @emotion/react@^11 @emotion/styled@^11 framer-motion@^6
+# npm
+npm i periwinkle-ui
 
-# or
+# yarn
+yarn add periwinkle-ui
 
-$ npm i @periwinkle-ui/react @emotion/react@^11 @emotion/styled@^11 framer-motion@^6
+# pnpm
+pnpm add periwinkle-ui
 ```
 
+```jsx
+import { Button } from 'periwinkle-ui'
+
+function App() {
+  return <Button />
+}
+```
 
 ## License
 
