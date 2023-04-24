@@ -1,59 +1,124 @@
 import { css } from '@emotion/react'
-import colors from '../../lib/colors'
+import { palette, lightText, darkText } from '../../lib/colors'
+import { PropsWithChildren } from 'react'
+import { SizeType, sizeSets } from '../../lib/sizes'
 
-type ButtonColorType = keyof typeof colors.periwinkle
+type ThemeMode = 'light' | 'dark'
+type VariantType = 'solid' | 'outline' | 'ghost' | 'link'
 
 interface ButtonProps {
   /**
-   * button text
+   * Use the variant prop to change the visual style of the Button. You can set the value to solid, ghost, outline, or link.
+   * @default 'solid'
    */
-  label?: string
+  variant?: VariantType
   /**
-   * background color
+   * theme mode
+   * @default 'light'
    */
-  bg?: ButtonColorType
+  themeMode?: ThemeMode
+  /**
+   * button size
+   * @default 'md'
+   */
+  size?: SizeType
   /**
    * click event handler
    */
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
-export function Button({ label = 'Primary', bg = '500', onClick }: ButtonProps) {
+export function Button({
+  variant = 'solid',
+  themeMode = 'light',
+  size = 'md',
+  onClick,
+  children,
+}: PropsWithChildren<ButtonProps>) {
   return (
-    <button css={buttonStyle(bg)} onClick={onClick}>
-      {label}
+    <button css={buttonStyle(themeMode, variant, size)} onClick={onClick}>
+      {children}
     </button>
   )
 }
 
-const buttonStyle = (bg: ButtonColorType) => css`
-  border: none;
-  outline: none;
-  box-sizing: border-box;
-  width: 10em;
-  height: 3em;
-  background: ${colors.periwinkle[bg]};
-  border-radius: 6px;
-  cursor: pointer;
-  color: ${colors.lightText.primary};
-  transition: all 0.2s ease-out;
-  -webkit-tap-highlight-color: transparent;
+const buttonStyle = (themeMode: ThemeMode, variant: VariantType, size: SizeType) =>
+  css`
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+    -webkit-tap-highlight-color: transparent;
 
-  &:disabled {
-    filter: grayscale(15%);
-    cursor: not-allowed;
-    opacity: 0.6;
-  }
+    font-size: ${sizeSets[size].fontSize};
+    height: ${sizeSets[size].height};
+    min-width: ${sizeSets[size].minWidth};
 
-  &:focus-visible {
-    box-shadow: 0 0 0.5rem #808ad8e4;
-  }
+    padding-left: 1em;
+    padding-right: 1em;
 
-  &:hover {
-    background: ${colors.hover[bg]};
-  }
+    ${variant === 'solid' &&
+    css`
+      background: ${palette(themeMode).primary.color};
+      color: ${lightText.primary};
+      &:hover {
+        background: ${palette(themeMode).primary.hover};
+      }
 
-  &:active {
-    background: ${colors.active[bg]};
-  }
-`
+      &:active {
+        background: ${palette(themeMode).primary.active};
+      }
+    `}
+    ${variant === 'outline' &&
+    css`
+      border: 1px solid ${palette(themeMode).primary.color};
+      background: transparent;
+      color: ${palette(themeMode).primary.color};
+      &:hover {
+        background: ${palette(themeMode).colors[50]};
+      }
+
+      &:active {
+        background: ${palette(themeMode).colors[100]};
+      }
+    `}
+    ${variant === 'ghost' &&
+    css`
+      background: transparent;
+      color: ${palette(themeMode).primary.color};
+      &:hover {
+        background: ${palette(themeMode).colors[50]};
+      }
+
+      &:active {
+        background: ${palette(themeMode).colors[100]};
+      }
+    `}
+    ${variant === 'link' &&
+    css`
+      background: transparent;
+      color: ${palette(themeMode).primary.color};
+      &:hover {
+        text-decoration: underline;
+        text-decoration-thickness: 2.5px;
+      }
+
+      &:active {
+        color: ${palette(themeMode).colors['700']};
+        text-decoration: underline;
+        text-decoration-thickness: 2.5px;
+      }
+    `}
+
+    &:disabled {
+      filter: grayscale(15%);
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    &:focus-visible {
+      box-shadow: 0 0 0.5rem ${palette(themeMode).primary.color}e4;
+    }
+  `
