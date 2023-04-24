@@ -1,12 +1,12 @@
 {
   "name": "periwinkle-ui",
-  "version": "0.0.21",
+  "version": "0.0.29",
   "private": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/pasteltones/periwinkle-ui"
+    "url": "https://github.com/Dok6n/periwinkle-ui"
   },
-  "author": "Pasteltones <ehrbs2018@gmail.com>",
+  "author": "Dok6n <ehrbs2018@gmail.com>",
   "license": "MIT",
   "description": "A blue-purple simple UI component for a React application.",
   "type": "module",
@@ -28,6 +28,8 @@
   "scripts": {
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "serve-storybook": "http-server storybook-static",
+    "prod-storybook": "pnpm storybook:build && pnpm storybook:serve",
     "dev": "vite",
     "build": "tsc && vite build",
     "prepare": "pnpm run build",
@@ -46,6 +48,11 @@
   },
   "engines": {
     "node": ">=18.x"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@emotion/react": "^11.10.6"
   },
   "devDependencies": {
     "@commitlint/cli": "14.1.0",
